@@ -28,6 +28,11 @@ public class SwipeTrail : MonoBehaviour
     //public Image pickerLine;
     //public GameObject pickerHue;
 
+    // For tracking, if the image was filled
+    public int PercentToBeFilled;
+    private int DestroyedMinesCount;
+    private int AmountOfMines;
+
     //! The start colour
     private Color Color = Color.red;
 
@@ -56,7 +61,7 @@ public class SwipeTrail : MonoBehaviour
         //picker.CurrentColor = Color;
 
 
-        setTrailColour(Color, TrailRenderer);
+        AmountOfMines = GameObject.FindGameObjectsWithTag("Mine").Length;
 
     }
 
@@ -81,9 +86,16 @@ public class SwipeTrail : MonoBehaviour
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit)) {
-                if(hit.transform.gameObject.name == PlaneToDrawOn.name) {
+                if(hit.transform.gameObject.name == PlaneToDrawOn.name || hit.transform.CompareTag("Mine")) {
                     transform.position = hit.point;
-                    
+                    if (hit.transform.CompareTag("Mine")) { // This line is stupid. However, I didn't want to rework the scene structure for a smarter code
+                        DestroyedMinesCount++;
+                        Destroy(hit.transform.gameObject);
+
+                        if(AmountOfMines * (float)PercentToBeFilled / 100f < DestroyedMinesCount) {
+                            print("stuff");
+                        }
+                    }
                 }
                 
             }

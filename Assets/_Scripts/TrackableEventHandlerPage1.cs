@@ -18,6 +18,7 @@ public class TrackableEventHandlerPage1 : DefaultTrackableEventHandler
  
 
     protected override void OnTrackingFound() {
+        GetComponentInChildren<SwipeTrail>().enabled = true;
      
 
         // ToDo do more stuff
@@ -26,7 +27,7 @@ public class TrackableEventHandlerPage1 : DefaultTrackableEventHandler
     }
 
     protected override void OnTrackingLost() {
-
+        GetComponentInChildren<SwipeTrail>().enabled = false;
         // ToDo do more stuff
         Debug.Log("man");
         
