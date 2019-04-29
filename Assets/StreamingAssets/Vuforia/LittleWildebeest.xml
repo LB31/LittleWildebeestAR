@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
+  <Tracking>
+    <ImageTarget name="Page_15" size="1.000000 0.707157" />
+    <ImageTarget name="Page_14" size="1.000000 0.707157" />
+    <ImageTarget name="Page_13_pic" size="1.000000 0.707157" />
+    <ImageTarget name="Page_13" size="1.000000 0.707157" />
+    <ImageTarget name="Page_12_pic" size="1.000000 0.707157" />
+    <ImageTarget name="Page_12" size="1.000000 0.707157" />
+    <ImageTarget name="Page_11_pic" size="1.000000 0.707157" />
+    <ImageTarget name="Page_11" size="1.000000 0.707157" />
+    <ImageTarget name="Page_10_pic" size="1.000000 0.707157" />
+    <ImageTarget name="Page_10" size="1.000000 0.707157" />
+    <ImageTarget name="Page_9_pic" size="1.000000 0.707157" />
+    <ImageTarget name="Page_9" size="1.000000 0.707157" />
+    <ImageTarget name="Page_8_pic" size="1.000000 0.707157" />
+    <ImageTarget name="Page_8" size="1.000000 0.707157" />
+    <ImageTarget name="Page_7_pic" size="1.000000 0.707157" />
+    <ImageTarget name="Page_7" size="1.000000 0.707157" />
+    <ImageTarget name="Page_6_pic" size="1.000000 0.707157" />
+    <ImageTarget name="Page_6" size="1.000000 0.707157" />
+    <ImageTarget name="Page_5_pic" size="1.000000 0.707157" />
+    <ImageTarget name="Page_5" size="1.000000 0.707157" />
+    <ImageTarget name="Page_4_pic" size="1.000000 0.707157" />
+    <ImageTarget name="Page_4" size="1.000000 0.707157" />
+    <ImageTarget name="Page_3_pic" size="1.000000 0.707157" />
+    <ImageTarget name="Page_3" size="1.000000 0.707157" />
+    <ImageTarget name="Page_2_pic" size="1.000000 0.707157" />
+    <ImageTarget name="Page_2" size="1.000000 0.707157" />
+    <ImageTarget name="Page_1_pic" size="1.000000 0.707157" />
+    <ImageTarget name="Page_1" size="1.000000 0.707157" />
+    <ImageTarget name="Page_0" size="1.000000 0.707157" />
+    <ImageTarget name="FrontPage" size="1.000000 0.707897" />
+  </Tracking>
+</QCARConfig>
