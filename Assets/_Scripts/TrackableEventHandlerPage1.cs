@@ -5,7 +5,7 @@ using Vuforia;
 
 public class TrackableEventHandlerPage1 : TrackableEventHandlerParent
 {
-
+    public GameObject UI;
 
     protected override void Start() {
         base.Start();
@@ -19,7 +19,7 @@ public class TrackableEventHandlerPage1 : TrackableEventHandlerParent
 
     protected override void OnTrackingFound() {
         GetComponentInChildren<SwipeTrail>().enabled = true;
-     
+        UI.SetActive(true);
 
         // ToDo do more stuff
 
@@ -27,6 +27,8 @@ public class TrackableEventHandlerPage1 : TrackableEventHandlerParent
     }
 
     protected override void OnTrackingLost() {
+
+        UI.SetActive(false);
         GetComponentInChildren<SwipeTrail>().enabled = false;
         // ToDo do more stuff
         
