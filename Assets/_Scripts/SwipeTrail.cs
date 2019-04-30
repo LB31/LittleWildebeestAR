@@ -36,6 +36,8 @@ public class SwipeTrail : MonoBehaviour
     //! The start colour
     private Color Color = Color.green;
 
+    public GameObject ButtonsForLanguage;
+    private bool languageWasChosen;
 
     void Awake()
     {
@@ -72,7 +74,7 @@ public class SwipeTrail : MonoBehaviour
         bool fingerOnScreen = (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved) || Input.GetMouseButton(0);
         // Check, if user is using the colour bar
         //bool usingColour = EventSystem.current.currentSelectedGameObject != null && EventSystem.current.currentSelectedGameObject.GetComponent<Slider>() != null;
-        if (fingerOnScreen) // && !usingColour)
+        if (fingerOnScreen && languageWasChosen) // && !usingColour)
         {
             if (TouchedAlready == false) TouchedAlready = true;
             //Plane objPlane = new Plane(Camera.main.transform.forward * -1, transform.position);
@@ -200,10 +202,21 @@ public class SwipeTrail : MonoBehaviour
     }
 
     public void SelectColor(String language) {
-        /* Todo 
-         * Remove Buttons
-         * Set drawing color
-         */
+        languageWasChosen = true;
+
+        ButtonsForLanguage.SetActive(false);
+
+        switch (language) {
+            case "english":
+                Color = Color.blue;
+                break;
+            case "oshiwambo":
+                Color = Color.green;
+                break;
+            case "german":
+                Color = Color.red;
+                break;
+        }
 
         ReadingManager.chosenLanguage = language;
     }
