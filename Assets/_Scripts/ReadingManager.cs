@@ -8,9 +8,16 @@ public class ReadingManager : MonoBehaviour
 {
     public FileStorer[] AudioFilesToRead;
 
+    private AudioSource audioSource;
+
+    // 1 = german; 2 = english; oshiwambo = 3
+    public static string chosenLanguage;
+
     // Start is called before the first frame update
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
+
         TrackableEventHandlerParent.markerFound += doStuff;
     }
 
@@ -22,8 +29,29 @@ public class ReadingManager : MonoBehaviour
 
     public void doStuff(string stuff) {
         string resultString = Regex.Match(stuff, @"\d+").Value;
-        Int32.Parse(resultString);
+        
         print(resultString);
+
+        FileStorer currentFiles = AudioFilesToRead[Int32.Parse(resultString)];
+        AudioClip clipToPlay = null;
+        switch (chosenLanguage) {
+            case "german":
+                clipToPlay = currentFiles.german;
+                break;
+            case "english":
+                clipToPlay = currentFiles.english;
+                break;
+            case "oshiwambo":
+                clipToPlay = currentFiles.oshiwambo;
+                break;
+            default:
+                print("There was no language selected yet");
+                break;
+        }
+
+        if(clipToPlay != null)
+        audioSource.clip = clipToPlay;
+        audioSource.Play();
     }
 
 
@@ -34,5 +62,5 @@ public class FileStorer
 {
     public AudioClip german;
     public AudioClip english;
-    public AudioClip oschiwambo;
+    public AudioClip oshiwambo;
 }

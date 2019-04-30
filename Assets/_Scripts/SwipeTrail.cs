@@ -204,6 +204,8 @@ public class SwipeTrail : MonoBehaviour
          * Remove Buttons
          * Set drawing color
          */
+
+        ReadingManager.chosenLanguage = language;
     }
 
 }

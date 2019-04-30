@@ -63,7 +63,9 @@ public class TrackableEventHandlerParent : MonoBehaviour, ITrackableEventHandler
             newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)
         {
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
+
             markerFound(mTrackableBehaviour.TrackableName);
+
             OnTrackingFound();
         }
         else if (previousStatus == TrackableBehaviour.Status.TRACKED &&
