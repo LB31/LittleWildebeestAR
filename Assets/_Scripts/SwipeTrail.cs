@@ -34,7 +34,7 @@ public class SwipeTrail : MonoBehaviour
     private int AmountOfMines;
 
     //! The start colour
-    private Color Color = Color.red;
+    private Color Color = Color.green;
 
 
     void Awake()
@@ -93,7 +93,7 @@ public class SwipeTrail : MonoBehaviour
                         Destroy(hit.transform.gameObject);
 
                         if(AmountOfMines * (float)PercentToBeFilled / 100f < DestroyedMinesCount) {
-                            print("stuff");
+                            print("stuff"); // TODO react to the filled elephant
                         }
                     }
                 }
@@ -199,7 +199,12 @@ public class SwipeTrail : MonoBehaviour
         }
     }
 
-
+    public void SelectColor(String language) {
+        /* Todo 
+         * Remove Buttons
+         * Set drawing color
+         */
+    }
 
 }
 
