@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Vuforia;
 
-public class TrackableEventHandlerFrontPage : DefaultTrackableEventHandler
+public class TrackableEventHandlerFrontPage : TrackableEventHandlerParent
 {
 
 

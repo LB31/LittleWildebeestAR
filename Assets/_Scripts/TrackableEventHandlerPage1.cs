@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Vuforia;
 
-public class TrackableEventHandlerPage1 : DefaultTrackableEventHandler
+public class TrackableEventHandlerPage1 : TrackableEventHandlerParent
 {
 
 
@@ -22,14 +22,13 @@ public class TrackableEventHandlerPage1 : DefaultTrackableEventHandler
      
 
         // ToDo do more stuff
-        print("yay");
+
         
     }
 
     protected override void OnTrackingLost() {
         GetComponentInChildren<SwipeTrail>().enabled = false;
         // ToDo do more stuff
-        Debug.Log("man");
         
     }
 }
