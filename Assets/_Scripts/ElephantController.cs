@@ -8,10 +8,12 @@ public class ElephantController : MonoBehaviour
     private Animator animator;
 
     public float speed = 3.0F;
-    public float rotateSpeed = 3.0F;
+    public float rotateSpeed = 1.5F;
 
     private int input;
     private int rotator;
+
+    public Transform[] StuffToCollect;
 
     void Start() {
         animator = GetComponentInChildren<Animator>();
@@ -27,6 +29,14 @@ public class ElephantController : MonoBehaviour
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         float curSpeed = speed * input;
         characterController.SimpleMove(forward * curSpeed);
+    }
+
+    void OnControllerColliderHit(ControllerColliderHit hit) {
+        foreach (Transform item in StuffToCollect) {
+            if(hit.transform.Equals(item)) {
+                Destroy(hit.transform.gameObject);
+            }
+        }
     }
 
     public void GetInput(int input) {

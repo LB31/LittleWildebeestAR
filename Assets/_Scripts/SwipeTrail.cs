@@ -38,6 +38,10 @@ public class SwipeTrail : MonoBehaviour
 
     public GameObject ButtonsForLanguage;
     private bool languageWasChosen;
+    public Transform BrushTip;
+
+    private bool WasInElephantCollider;
+    private bool WasInMineCollider;
 
     void Awake()
     {
@@ -50,56 +54,72 @@ public class SwipeTrail : MonoBehaviour
         TrailRenderer.enabled = false;
 
 
-        // Color selection; Source: https://github.com/judah4/HSV-Color-Picker-Unity
-        //picker.onValueChanged.AddListener(color =>
-        //{
-        //    renderer.material.color = color;
-        //    Color = color;
-        //    pickerLine.color = color;
-        //});
-
-        //renderer.material.color = picker.CurrentColor;
-
-        //picker.CurrentColor = Color;
-
-
         AmountOfMines = GameObject.FindGameObjectsWithTag("Mine").Length;
 
     }
 
+    private void OnTriggerStay(Collider other) {
+        if(other.transform.gameObject.name == PlaneToDrawOn.name || other.transform.CompareTag("Mine")) {
+
+            TrailRenderer.enabled = true;
+            WasInElephantCollider = true;
+            print("no cube");
+
+            if (other.transform.CompareTag("Mine")) { // This line is stupid. However, I didn't want to rework the scene structure for a smarter code
+                DestroyedMinesCount++;
+                Destroy(other.transform.gameObject);
+
+                WasInMineCollider = true;
+
+                if (AmountOfMines * (float)PercentToBeFilled / 100f < DestroyedMinesCount) {
+                    print("stuff"); // TODO react to the filled elephant
+                }
+            } else {
+                WasInMineCollider = false;
+            }
+
+        }
+
+        if (other.transform.gameObject.name.Contains("Cube")) {
+            TrailRenderer.enabled = false;
+            PlaneToDrawOn.GetComponent<Collider>().enabled = false;
+            print("cube");
+            if (WasInElephantCollider) {
+                WasInElephantCollider = false;
+                StoreRay();
+                CreateLineObject();
+            }
+        } else if(!WasInElephantCollider) {
+            PlaneToDrawOn.GetComponent<Collider>().enabled = true;
+        }
+    }
+
+    
+    private void OnTriggerExit(Collider other) {
+        if (other.transform.gameObject.name == PlaneToDrawOn.name && !WasInMineCollider) {
+            TrailRenderer.enabled = false;
+            //StoreRay();
+            //CreateLineObject();
+            print("exit");
+        }
+
+    }
 
     void Update()
     {
         // Check, if the screen is touched and if the finger / mouse is moving
         bool fingerOnScreen = (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved) || Input.GetMouseButton(0);
-        // Check, if user is using the colour bar
-        //bool usingColour = EventSystem.current.currentSelectedGameObject != null && EventSystem.current.currentSelectedGameObject.GetComponent<Slider>() != null;
+  
+
         if (fingerOnScreen && languageWasChosen) // && !usingColour)
         {
             if (TouchedAlready == false) TouchedAlready = true;
-            //Plane objPlane = new Plane(Camera.main.transform.forward * -1, transform.position);
-            //Ray mRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-            //float rayDistance;
-            //if (objPlane.Raycast(mRay, out rayDistance))
-            //{
-            //    transform.position = mRay.GetPoint(rayDistance);
-            //}
+     
 
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit)) {
-                if(hit.transform.gameObject.name == PlaneToDrawOn.name || hit.transform.CompareTag("Mine")) {
-                    transform.position = hit.point;
-                    if (hit.transform.CompareTag("Mine")) { // This line is stupid. However, I didn't want to rework the scene structure for a smarter code
-                        DestroyedMinesCount++;
-                        Destroy(hit.transform.gameObject);
-
-                        if(AmountOfMines * (float)PercentToBeFilled / 100f < DestroyedMinesCount) {
-                            print("stuff"); // TODO react to the filled elephant
-                        }
-                    }
-                }
-                
+                transform.position = hit.point;
             }
 
         }
@@ -108,7 +128,7 @@ public class SwipeTrail : MonoBehaviour
         if (fingerOnScreen && FirstTouch) // && !usingColour)
         {
             FirstTouch = false;
-            TrailRenderer.enabled = true;
+            
             setTrailColour(Color, TrailRenderer);
         }
 
@@ -122,11 +142,15 @@ public class SwipeTrail : MonoBehaviour
         {
             StoreRay();
             CreateLineObject();
+
+            TouchedAlready = false;
         }
 
 
 
     }
+
+
 
     //! The created object is used for retracing the line
     private void CreateLineObject()
@@ -136,7 +160,7 @@ public class SwipeTrail : MonoBehaviour
         newLine.transform.parent = PlaneToDrawOn.transform;
         newLine.name = "Line segment " + LineCounter;
         newLine.AddComponent<LineRenderer>();
-        TouchedAlready = false;
+        
         RetraceLine(newLine.GetComponent<LineRenderer>(), LineCounter);
 
     }
@@ -159,6 +183,7 @@ public class SwipeTrail : MonoBehaviour
 
     private void StoreRay()
     {
+        print("store ray");
         int arrayLength = TrailRenderer.positionCount;
         Color currentColour = TrailRenderer.endColor;
         Vector3[] rayPositions = new Vector3[arrayLength];
@@ -173,11 +198,7 @@ public class SwipeTrail : MonoBehaviour
         TrailRenderer.enabled = false;
     }
 
-    public string getJsonGraffiti()
-    {
-        jsonObject = JsonUtility.ToJson(lineManager);
-        return jsonObject;
-    }
+
 
 
 
