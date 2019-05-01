@@ -42,7 +42,7 @@ public class SwipeTrail : MonoBehaviour
     void Awake()
     {
 
-        TrailRenderer = GetComponent<TrailRenderer>();
+        TrailRenderer = GetComponentInChildren<TrailRenderer>();
         TrailRenderer.startWidth = lineWidth;
         TrailRenderer.endWidth = lineWidth;
 
@@ -162,7 +162,7 @@ public class SwipeTrail : MonoBehaviour
         int arrayLength = TrailRenderer.positionCount;
         Color currentColour = TrailRenderer.endColor;
         Vector3[] rayPositions = new Vector3[arrayLength];
-        GetComponent<TrailRenderer>().GetPositions(rayPositions);
+        GetComponentInChildren<TrailRenderer>().GetPositions(rayPositions);
 
         lineManager.AllLines.Add(new Line(currentColour, rayPositions));
         
