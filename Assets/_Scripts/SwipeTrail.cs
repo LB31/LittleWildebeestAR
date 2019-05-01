@@ -207,7 +207,7 @@ public class SwipeTrail : MonoBehaviour
     public void SelectColor(String language) {
         languageWasChosen = true;
 
-        ButtonsForLanguage.SetActive(false);
+        Destroy(ButtonsForLanguage);
 
         switch (language) {
             case "english":
