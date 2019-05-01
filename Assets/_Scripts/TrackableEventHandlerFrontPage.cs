@@ -20,16 +20,12 @@ public class TrackableEventHandlerFrontPage : TrackableEventHandlerParent
     protected override void OnTrackingFound() {
         base.OnTrackingFound();
 
-        // ToDo do more stuff
-        print("yay");
         
     }
 
     protected override void OnTrackingLost() {
         base.OnTrackingLost();
 
-        // ToDo do more stuff
-        Debug.Log("man");
         
     }
 }

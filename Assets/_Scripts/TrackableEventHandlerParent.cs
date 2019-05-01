@@ -72,6 +72,9 @@ public class TrackableEventHandlerParent : MonoBehaviour, ITrackableEventHandler
                  newStatus == TrackableBehaviour.Status.NO_POSE)
         {
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
+
+            markerFound("lost");
+
             OnTrackingLost();
         }
         else

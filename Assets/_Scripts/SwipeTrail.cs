@@ -209,6 +209,10 @@ public class SwipeTrail : MonoBehaviour
 
         Destroy(ButtonsForLanguage);
 
+        //foreach (Transform child in ButtonsForLanguage.transform) {
+        //    child.GetComponent<Image>().enabled = false;
+        //}
+
         switch (language) {
             case "english":
                 Color = Color.blue;

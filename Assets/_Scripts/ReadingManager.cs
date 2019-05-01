@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using UnityEngine;
 
@@ -10,48 +11,62 @@ public class ReadingManager : MonoBehaviour
 
     private AudioSource audioSource;
 
+    public int lastFoundPage = 0;
+
+    public string langForPublic;
+
     // 1 = german; 2 = english; oshiwambo = 3
-    public static string chosenLanguage;
+    public static string chosenLanguage = "english"; // Let's say english is default
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         audioSource = GetComponent<AudioSource>();
 
-        TrackableEventHandlerParent.markerFound += doStuff;
+        TrackableEventHandlerParent.markerFound += AssignAndPlayAudio;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
-    public void doStuff(string stuff) {
-        string resultString = Regex.Match(stuff, @"\d+").Value;
-        
-        print(resultString);
 
-        FileStorer currentFiles = AudioFilesToRead[Int32.Parse(resultString)];
-        AudioClip clipToPlay = null;
-        switch (chosenLanguage) {
-            case "german":
-                clipToPlay = currentFiles.german;
-                break;
-            case "english":
-                clipToPlay = currentFiles.english;
-                break;
-            case "oshiwambo":
-                clipToPlay = currentFiles.oshiwambo;
-                break;
-            default:
-                print("There was no language selected yet");
-                break;
+    public void AssignAndPlayAudio(string stuff) {
+        langForPublic = chosenLanguage;
+        if (stuff == "lost") {
+            audioSource.Pause();
+            print("paused and lost");
+            return;
         }
 
-        if(clipToPlay != null)
-        audioSource.clip = clipToPlay;
-        audioSource.Play();
+        string resultString = Regex.Match(stuff, @"\d+").Value;
+
+        if (resultString.Any(char.IsDigit)) {
+            int newFoundPage = Int32.Parse(resultString);
+            print(newFoundPage);
+            if (newFoundPage != lastFoundPage) {
+                print("new page");
+                FileStorer currentFiles = AudioFilesToRead[newFoundPage];
+                AudioClip clipToPlay = null;
+
+                switch (chosenLanguage) {
+                    case "german":
+                        clipToPlay = currentFiles.german;
+                        break;
+                    case "english":
+                        clipToPlay = currentFiles.english;
+                        break;
+                    case "oshiwambo":
+                        clipToPlay = currentFiles.oshiwambo;
+                        break;
+                }
+                lastFoundPage = newFoundPage;
+                if (clipToPlay != null) {
+                    audioSource.clip = clipToPlay;
+                    audioSource.Play();
+                }
+            } else {
+                audioSource.UnPause();
+            }
+            
+        }
+
     }
 
 
