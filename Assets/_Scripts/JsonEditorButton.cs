@@ -12,5 +12,9 @@ public class JsonEditorButton : Editor
         if (GUILayout.Button("Save data")) {
             dc.SerializeData();
         }
+
+        if (GUILayout.Button("Load data")) {
+            dc.ReadData();
+        }
     }
 }

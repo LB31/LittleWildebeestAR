@@ -13,18 +13,26 @@ public class DatabaseController : MonoBehaviour
 
     private string dataPath = "/StreamingAssets/data.json";
 
+    private string filePath;
+
     // Start is called before the first frame update
     void Start()
     {
         SerializeData();
         print(json);
+        filePath = Application.dataPath + dataPath;
     }
 
     public void SerializeData() {
         json = JsonUtility.ToJson(this);
-        string filePath = Application.dataPath + dataPath;
+        
         File.WriteAllText(filePath, json);
     } 
+
+    public void ReadData() {
+        JsonUtility.FromJsonOverwrite(filePath, this);
+        print("done");
+    }
  
 }
 

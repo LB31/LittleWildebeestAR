@@ -9,7 +9,7 @@ using UnityEngine.EventSystems;
 public class SwipeTrail : MonoBehaviour
 {
     public LineManager lineManager = new LineManager();
-    public string jsonObject;
+
     public int LineCounter = -1;
 
     public GameObject PlaneToDrawOn;
@@ -19,14 +19,11 @@ public class SwipeTrail : MonoBehaviour
     public Material TrailMaterial;
     public bool TouchedAlready = false;
     private TrailRenderer TrailRenderer;
-    public bool AllowRetraceLine; // currently set to true in the inspector
-    public int RayPositionCounter = 1;
+
+
     public bool FirstTouch = true;
 
-    //public Renderer renderer;
-    //public ColorPicker picker;
-    //public Image pickerLine;
-    //public GameObject pickerHue;
+
 
     // For tracking, if the image was filled
     public int PercentToBeFilled;
@@ -39,9 +36,9 @@ public class SwipeTrail : MonoBehaviour
     public GameObject ButtonsForLanguage;
     private bool languageWasChosen;
     public Transform BrushTip;
+    public SpriteRenderer BrushImage;
 
-    private bool WasInElephantCollider;
-    private bool WasInMineCollider;
+
 
     void Awake()
     {
@@ -59,44 +56,28 @@ public class SwipeTrail : MonoBehaviour
     }
 
     private void OnTriggerStay(Collider other) {
-        if(other.transform.gameObject.name == PlaneToDrawOn.name || other.transform.CompareTag("Mine")) {
-
+        if (other.transform.gameObject.name == PlaneToDrawOn.name || other.transform.CompareTag("Mine")) {
             TrailRenderer.enabled = true;
-            WasInElephantCollider = true;
-            print("no cube");
+
+       
 
             if (other.transform.CompareTag("Mine")) { // This line is stupid. However, I didn't want to rework the scene structure for a smarter code
                 DestroyedMinesCount++;
                 Destroy(other.transform.gameObject);
 
-                WasInMineCollider = true;
+          
 
                 if (AmountOfMines * (float)PercentToBeFilled / 100f < DestroyedMinesCount) {
                     print("stuff"); // TODO react to the filled elephant
                 }
-            } else {
-                WasInMineCollider = false;
             }
 
-        }
-
-        if (other.transform.gameObject.name.Contains("Cube")) {
-            TrailRenderer.enabled = false;
-            PlaneToDrawOn.GetComponent<Collider>().enabled = false;
-            print("cube");
-            if (WasInElephantCollider) {
-                WasInElephantCollider = false;
-                StoreRay();
-                CreateLineObject();
-            }
-        } else if(!WasInElephantCollider) {
-            PlaneToDrawOn.GetComponent<Collider>().enabled = true;
         }
     }
 
-    
+
     private void OnTriggerExit(Collider other) {
-        if (other.transform.gameObject.name == PlaneToDrawOn.name && !WasInMineCollider) {
+        if (other.transform.gameObject.name == PlaneToDrawOn.name) {
             TrailRenderer.enabled = false;
             //StoreRay();
             //CreateLineObject();
@@ -105,15 +86,16 @@ public class SwipeTrail : MonoBehaviour
 
     }
 
+
     void Update()
     {
         // Check, if the screen is touched and if the finger / mouse is moving
         bool fingerOnScreen = (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved) || Input.GetMouseButton(0);
   
 
-        if (fingerOnScreen && languageWasChosen) // && !usingColour)
+        if (fingerOnScreen && languageWasChosen)
         {
-            if (TouchedAlready == false) TouchedAlready = true;
+            if (!TouchedAlready) TouchedAlready = true;
      
 
             RaycastHit hit;
@@ -121,14 +103,14 @@ public class SwipeTrail : MonoBehaviour
             if (Physics.Raycast(ray, out hit)) {
                 transform.position = hit.point;
             }
+  
+  
 
         }
 
         // To avoid an additional line
-        if (fingerOnScreen && FirstTouch) // && !usingColour)
-        {
-            FirstTouch = false;
-            
+        if (fingerOnScreen && FirstTouch){
+            FirstTouch = false; 
             setTrailColour(Color, TrailRenderer);
         }
 
@@ -238,6 +220,11 @@ public class SwipeTrail : MonoBehaviour
                 Color = Color.red;
                 break;
         }
+
+        setTrailColour(Color, TrailRenderer);
+
+        BrushImage.enabled = true;
+        BrushImage.color = Color;
 
         ReadingManager.chosenLanguage = language;
     }
