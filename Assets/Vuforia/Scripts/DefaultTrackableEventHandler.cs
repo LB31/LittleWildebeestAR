@@ -8,7 +8,9 @@ Confidential and Proprietary - Protected under copyright and other laws.
 
 using UnityEngine;
 using Vuforia;
-
+using System.Collections;
+using System.Collections.Generic;
+using System;
 /// <summary>
 /// A custom handler that implements the ITrackableEventHandler interface.
 ///
@@ -32,6 +34,8 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
         mTrackableBehaviour = GetComponent<TrackableBehaviour>();
         if (mTrackableBehaviour)
             mTrackableBehaviour.RegisterTrackableEventHandler(this);
+
+        //soundTarget = (AudioSource)gameObject.AddComponent<AudioSource>();
     }
 
     protected virtual void OnDestroy()
@@ -98,6 +102,12 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
         // Enable canvas':
         foreach (var component in canvasComponents)
             component.enabled = true;
+        //Play Sound, IF detect an target
+        if (mTrackableBehaviour.TrackableName == "Page_8_pic") {
+            playSound("pigRemix");
+        }
+
+
     }
 
 
@@ -118,7 +128,40 @@ public class DefaultTrackableEventHandler : MonoBehaviour, ITrackableEventHandle
         // Disable canvas':
         foreach (var component in canvasComponents)
             component.enabled = false;
+
+        //Stop All Sounds if Target Lost
+        StopAllAudio();
+
     }
 
     #endregion // PROTECTED_METHODS
+
+    #region Custom_Code
+    //------------Begin Sound----------
+    public AudioSource soundTarget;
+    public AudioClip clipTarget;
+    private AudioSource[] allAudioSources;
+
+    //function to stop all sounds
+    void StopAllAudio() {
+        allAudioSources = FindObjectsOfType(typeof(AudioSource)) as AudioSource[];
+        foreach (AudioSource audioS in allAudioSources) {
+            audioS.Stop();
+        }
+    }
+
+    //function to play sound
+    void playSound(string ss) {
+        clipTarget = (AudioClip)Resources.Load(ss);
+        soundTarget.clip = clipTarget;
+        soundTarget.loop = false;
+        soundTarget.playOnAwake = false;
+        soundTarget.Play();
+        
+    }
+
+    //-----------End Sound------------
+    #endregion // customCode
+
+
 }
