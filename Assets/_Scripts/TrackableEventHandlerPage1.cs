@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using Vuforia;
 
@@ -8,6 +9,8 @@ public class TrackableEventHandlerPage1 : TrackableEventHandlerParent
     public GameObject UI;
     public GameObject Brush;
     public Transform Drawing;
+    public Transform ElephantMessage;
+    public TextMeshProUGUI textStuff;
 
     protected override void Start() {
         base.Start();
@@ -35,6 +38,15 @@ public class TrackableEventHandlerPage1 : TrackableEventHandlerParent
             }
         }
 
+        foreach (Transform item in ElephantMessage) {
+            if (item.GetComponent<Renderer>()) {
+                item.GetComponent<Renderer>().enabled = true;
+            }
+
+        }
+
+        textStuff.enabled = true;
+
 
     }
 
@@ -52,7 +64,16 @@ public class TrackableEventHandlerPage1 : TrackableEventHandlerParent
             if (line.GetComponent<LineRenderer>()) {
                 line.GetComponent<LineRenderer>().enabled = false;
             }
+
         }
+
+        foreach (Transform item in ElephantMessage) {
+            if (item.GetComponent<Renderer>()) {
+                item.GetComponent<Renderer>().enabled = false;
+            }
+        }
+
+        textStuff.enabled = false;
 
     }
 }
