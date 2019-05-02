@@ -14,7 +14,7 @@ public class SwipeTrail : MonoBehaviour
 
     public GameObject PlaneToDrawOn;
 
-    public float lineWidth = 0.2f;
+    public float lineWidth = 0.75f;
 
     public Material TrailMaterial;
     public bool TouchedAlready = false;
