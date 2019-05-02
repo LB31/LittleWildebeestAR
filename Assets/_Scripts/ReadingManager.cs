@@ -15,8 +15,10 @@ public class ReadingManager : MonoBehaviour
 
     public string langForPublic;
 
+    private int readyAudioPages = 5;
+
     // 1 = german; 2 = english; oshiwambo = 3
-    public static string chosenLanguage = "english"; // Let's say english is default
+    public static string chosenLanguage = ""; 
 
     // Start is called before the first frame update
     void Start() {
@@ -37,7 +39,7 @@ public class ReadingManager : MonoBehaviour
 
         string resultString = Regex.Match(stuff, @"\d+").Value;
 
-        if (resultString.Any(char.IsDigit) && Int32.Parse(resultString) <= 5) {
+        if (resultString.Any(char.IsDigit) && Int32.Parse(resultString) <= readyAudioPages && chosenLanguage != "") {
             int newFoundPage = Int32.Parse(resultString);
             print(newFoundPage);
             if (newFoundPage != lastFoundPage) {

@@ -231,6 +231,7 @@ public class SwipeTrail : MonoBehaviour
         BrushImage.color = Color;
 
         ReadingManager.chosenLanguage = language;
+        TrackableEventHandlerParent.markerFound("1"); // To play the audio of the first page immediately
     }
 
 }
