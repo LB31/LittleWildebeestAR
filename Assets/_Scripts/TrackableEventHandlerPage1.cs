@@ -24,7 +24,6 @@ public class TrackableEventHandlerPage1 : TrackableEventHandlerParent
         if(UI != null)
             UI.SetActive(true);
 
-        Brush.SetActive(true);
 
     }
 
@@ -34,7 +33,7 @@ public class TrackableEventHandlerPage1 : TrackableEventHandlerParent
         if (UI != null)
             UI.SetActive(false);
         
-        Brush.SetActive(false);
+  
 
     }
 }

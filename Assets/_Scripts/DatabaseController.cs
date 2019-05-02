@@ -7,7 +7,7 @@ using static JsonEditorButton;
 [Serializable]
 public class DatabaseController : MonoBehaviour
 {
-    JsonEditorButton JsonEditorButton = new JsonEditorButton();
+
     
     public List<AnimalData> AllAnimals;
 
