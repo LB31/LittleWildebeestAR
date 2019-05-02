@@ -17,7 +17,9 @@ public class ReadingManager : MonoBehaviour
 
     private int readyAudioPages = 5;
 
-    // 1 = german; 2 = english; oshiwambo = 3
+    // 0 = german; 1 = english; oshiwambo = 2
+    public static int chosenLanguageNumber = -1;
+
     public static string chosenLanguage = ""; 
 
     // Start is called before the first frame update
@@ -50,12 +52,15 @@ public class ReadingManager : MonoBehaviour
                 switch (chosenLanguage) {
                     case "german":
                         clipToPlay = currentFiles.german;
+                        chosenLanguageNumber = 0;
                         break;
                     case "english":
                         clipToPlay = currentFiles.english;
+                        chosenLanguageNumber = 1;
                         break;
                     case "oshiwambo":
                         clipToPlay = currentFiles.oshiwambo;
+                        chosenLanguageNumber = 2;
                         break;
                 }
                 lastFoundPage = newFoundPage;

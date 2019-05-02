@@ -38,6 +38,7 @@ public class SwipeTrail : MonoBehaviour
     public Transform BrushTip;
     public SpriteRenderer BrushImage;
 
+    public GameObject ApprovalElephant;
 
 
     void Awake()
@@ -68,7 +69,7 @@ public class SwipeTrail : MonoBehaviour
           
 
                 if (AmountOfMines * (float)PercentToBeFilled / 100f < DestroyedMinesCount) {
-                    print("stuff"); // TODO react to the filled elephant
+                    ApprovalElephant.SetActive(true); // TODO react to the filled elephant
                 }
             }
 

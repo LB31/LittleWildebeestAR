@@ -5789,10 +5789,11 @@ MonoBehaviour:
   TrailMaterial: {fileID: 2100000, guid: 3f357b3421110d548a8a2b1216e676e9, type: 2}
   TouchedAlready: 0
   FirstTouch: 1
-  PercentToBeFilled: 70
+  PercentToBeFilled: 60
   ButtonsForLanguage: {fileID: 1485061903}
   BrushTip: {fileID: 374561332}
   BrushImage: {fileID: 1870805462}
+  ApprovalElephant: {fileID: 6105389673935820624}
 --- !u!212 &875635823
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7180,17 +7181,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1113870265}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -8.4}
-  m_LocalScale: {x: 0.3229711, y: 0.32297087, z: 0.3229709}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 15.9}
+  m_LocalScale: {x: 0.27508095, y: 0.27508074, z: 0.27508077}
   m_Children:
   - {fileID: 1898387772}
   m_Father: {fileID: 4441004620550654551}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -47.9, y: 19.6}
+  m_AnchoredPosition: {x: -85.1, y: 27.9}
   m_SizeDelta: {x: 905, y: 425}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1113870267
@@ -13860,7 +13861,7 @@ CharacterController:
   m_GameObject: {fileID: 6105389673935820624}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Height: 2
   m_Radius: 1.88
@@ -14197,7 +14198,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6105389673935820624}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 90225e7e30c2b3e4aab902a088c3c7f0, type: 3}
   m_Name: 
@@ -14293,6 +14294,7 @@ GameObject:
   - component: {fileID: 4441004620550654551}
   - component: {fileID: 4026603615921544836}
   - component: {fileID: 5675657508854952564}
+  - component: {fileID: 3717812294460509922}
   m_Layer: 0
   m_Name: SpeechBubble
   m_TagString: Untagged
@@ -14300,6 +14302,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3717812294460509922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3717812294460509921}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64cbf7a3a96358740bab0848a8a25928, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BubbleMessages:
+  - "Gut gemacht! Lass' uns zur n\xE4chsten Seite gehen"
+  - Well done! Let's go to the next page
+  - 
+  text: {fileID: 0}
 --- !u!1 &4004375010208120257
 GameObject:
   m_ObjectHideFlags: 0
@@ -14391,7 +14410,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3717812294460509921}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.2900006, y: 5.84, z: -9.86}
+  m_LocalPosition: {x: -0.22, y: 2.66, z: -0.22}
   m_LocalScale: {x: 0.05526101, y: 0.05526104, z: 0.05526103}
   m_Children:
   - {fileID: 1113870266}
