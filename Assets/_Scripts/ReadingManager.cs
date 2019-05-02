@@ -37,7 +37,7 @@ public class ReadingManager : MonoBehaviour
 
         string resultString = Regex.Match(stuff, @"\d+").Value;
 
-        if (resultString.Any(char.IsDigit)) {
+        if (resultString.Any(char.IsDigit) && Int32.Parse(resultString) <= 5) {
             int newFoundPage = Int32.Parse(resultString);
             print(newFoundPage);
             if (newFoundPage != lastFoundPage) {
