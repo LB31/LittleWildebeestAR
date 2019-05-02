@@ -29,10 +29,8 @@ public class DatabaseController : MonoBehaviour
     void Start()
     {
         SerializeData();
-        print(json);
-
         string objectName = gameObject.name.Replace("InfromationPlane", "");
-        ActivateInformation(objectName);
+
 
 
     }
@@ -49,10 +47,7 @@ public class DatabaseController : MonoBehaviour
     }
 
 
-    private void Update() {
-        
-        transform.LookAt(Camera.main.transform);
-    }
+
 
     public void ActivateInformation(string animal) {
         AnimalData currentAnimal = null;
@@ -61,12 +56,12 @@ public class DatabaseController : MonoBehaviour
                 currentAnimal = item;
         }
         if (currentAnimal != null) {
-            int languageNumb = 1; //ReadingManager.chosenLanguageNumber;
+            int languageNumb = ReadingManager.chosenLanguageNumber;
             TextName.text = "<b>" + currentAnimal.AnimalName + "</b>";
             TextInformation.text = "<b>Information</b>\n" + currentAnimal.Information[languageNumb];
             TextPopulation.text = "<b>Population</b>\n" + currentAnimal.Population[languageNumb];
             TextDiet.text = "<b>Diet</b>\n" + currentAnimal.Diet[languageNumb];
-            print(currentAnimal.Information[1]);
+      
         }
     }
 

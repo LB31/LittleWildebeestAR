@@ -18,8 +18,8 @@ public class ReadingManager : MonoBehaviour
     private int readyAudioPages = 5;
 
     // 0 = german; 1 = english; oshiwambo = 2
-    public static int chosenLanguageNumber = 1;
-    public static string chosenLanguage = "english"; // Let's use english as default
+    public static int chosenLanguageNumber = -1;
+    public static string chosenLanguage = ""; // Let's use english as default
     public static bool languageWasChanged;
 
     // Start is called before the first frame update
