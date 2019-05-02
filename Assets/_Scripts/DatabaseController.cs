@@ -1,16 +1,18 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using static JsonEditorButton;
 
 [Serializable]
 public class DatabaseController : MonoBehaviour
 {
+    JsonEditorButton JsonEditorButton = new JsonEditorButton();
+    
     public List<AnimalData> AllAnimals;
 
     private string json;
-
+    
     private string dataPath = "/StreamingAssets/data.json";
 
     private string filePath;
@@ -25,7 +27,7 @@ public class DatabaseController : MonoBehaviour
 
     public void SerializeData() {
         json = JsonUtility.ToJson(this);
-        
+        filePath = Application.dataPath + dataPath;
         File.WriteAllText(filePath, json);
     } 
 
