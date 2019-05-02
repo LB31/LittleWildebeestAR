@@ -19,8 +19,8 @@ public class ReadingManager : MonoBehaviour
 
     // 0 = german; 1 = english; oshiwambo = 2
     public static int chosenLanguageNumber = -1;
-
-    public static string chosenLanguage = ""; 
+    public static string chosenLanguage = "";
+    public static bool languageWasChanged;
 
     // Start is called before the first frame update
     void Start() {
@@ -44,7 +44,8 @@ public class ReadingManager : MonoBehaviour
         if (resultString.Any(char.IsDigit) && Int32.Parse(resultString) <= readyAudioPages && chosenLanguage != "") {
             int newFoundPage = Int32.Parse(resultString);
             print(newFoundPage);
-            if (newFoundPage != lastFoundPage) {
+            if (newFoundPage != lastFoundPage || languageWasChanged) {
+                languageWasChanged = false;
                 print("new page");
                 FileStorer currentFiles = AudioFilesToRead[newFoundPage];
                 AudioClip clipToPlay = null;

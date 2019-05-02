@@ -65,6 +65,7 @@ public class TrackableEventHandlerParent : MonoBehaviour, ITrackableEventHandler
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
 
             markerFound(mTrackableBehaviour.TrackableName);
+            SwipeTrail.LastMarkerName = mTrackableBehaviour.TrackableName;
 
             OnTrackingFound();
         }

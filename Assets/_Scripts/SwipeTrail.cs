@@ -40,9 +40,14 @@ public class SwipeTrail : MonoBehaviour
 
     public GameObject ApprovalElephant;
 
+    public static String LastMarkerName;
+
+    private Vector3 StandardPosition;
+
 
     void Awake()
     {
+        StandardPosition = transform.position;
 
         TrailRenderer = GetComponentInChildren<TrailRenderer>();
         TrailRenderer.startWidth = lineWidth;
@@ -101,7 +106,7 @@ public class SwipeTrail : MonoBehaviour
 
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out hit)) {
+            if (Physics.Raycast(ray, out hit) && !EventSystem.current.IsPointerOverGameObject()) {
                 transform.position = hit.point;
             }
   
@@ -208,7 +213,7 @@ public class SwipeTrail : MonoBehaviour
     public void SelectColor(String language) {
         languageWasChosen = true;
 
-        Destroy(ButtonsForLanguage);
+        //Destroy(ButtonsForLanguage);
 
         //foreach (Transform child in ButtonsForLanguage.transform) {
         //    child.GetComponent<Image>().enabled = false;
@@ -231,8 +236,15 @@ public class SwipeTrail : MonoBehaviour
         BrushImage.enabled = true;
         BrushImage.color = Color;
 
-        ReadingManager.chosenLanguage = language;
-        TrackableEventHandlerParent.markerFound("1"); // To play the audio of the first page immediately
+        transform.position = StandardPosition;
+
+
+        if (ReadingManager.chosenLanguage != language) {
+            ReadingManager.chosenLanguage = language;
+            ReadingManager.languageWasChanged = true;
+            TrackableEventHandlerParent.markerFound(LastMarkerName); // To play the audio of the first page immediately
+            print(LastMarkerName);
+        }
     }
 
 }

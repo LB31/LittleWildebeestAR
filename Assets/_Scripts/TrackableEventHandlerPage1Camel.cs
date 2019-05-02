@@ -29,8 +29,6 @@ public class TrackableEventHandlerPage1Camel : TrackableEventHandlerParent
         StartCoroutine(Wait(3));
         
 
-        // ToDo do more stuff
-
         
     }
 
@@ -39,7 +37,7 @@ public class TrackableEventHandlerPage1Camel : TrackableEventHandlerParent
 
         GetComponent<AudioSource>().Stop();
         GetComponentInChildren<Animator>().enabled = false;
-        // ToDo do more stuff
+     
         
     }
 }

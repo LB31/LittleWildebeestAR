@@ -27,7 +27,7 @@ public class TrackableEventHandlerPage1 : TrackableEventHandlerParent
 
         Brush.SetActive(true);
         Brush.GetComponentInChildren<SpriteRenderer>().enabled = true;
-        GetComponentInChildren<SwipeTrail>().enabled = true;
+        //GetComponentInChildren<SwipeTrail>().enabled = true;
 
         if (UI != null)
             UI.SetActive(true);
@@ -37,7 +37,8 @@ public class TrackableEventHandlerPage1 : TrackableEventHandlerParent
                 line.GetComponent<LineRenderer>().enabled = true;
             }
         }
-
+        
+        // To show the elephant and the speech bubble
         foreach (Transform item in ElephantMessage) {
             if (item.GetComponent<Renderer>()) {
                 item.GetComponent<Renderer>().enabled = true;
@@ -53,7 +54,7 @@ public class TrackableEventHandlerPage1 : TrackableEventHandlerParent
     protected override void OnTrackingLost() {
 
 
-        GetComponentInChildren<SwipeTrail>().enabled = false;
+        //GetComponentInChildren<SwipeTrail>().enabled = false;
         Brush.SetActive(false);
         
 
