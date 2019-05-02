@@ -37,15 +37,17 @@ public class TrackableEventHandlerPage1 : TrackableEventHandlerParent
                 line.GetComponent<LineRenderer>().enabled = true;
             }
         }
-        
+
         // To show the elephant and the speech bubble
-        foreach (Transform item in ElephantMessage) {
+        if (ElephantMessage != null)
+            foreach (Transform item in ElephantMessage) {
             if (item.GetComponent<Renderer>()) {
                 item.GetComponent<Renderer>().enabled = true;
             }
 
         }
 
+        if(textStuff != null)
         textStuff.enabled = true;
 
 
@@ -68,13 +70,15 @@ public class TrackableEventHandlerPage1 : TrackableEventHandlerParent
 
         }
 
+        if(ElephantMessage != null)
         foreach (Transform item in ElephantMessage) {
             if (item.GetComponent<Renderer>()) {
                 item.GetComponent<Renderer>().enabled = false;
             }
         }
 
-        textStuff.enabled = false;
+        if (textStuff != null)
+            textStuff.enabled = false;
 
     }
 }

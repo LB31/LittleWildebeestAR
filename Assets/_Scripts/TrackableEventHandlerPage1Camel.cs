@@ -26,7 +26,7 @@ public class TrackableEventHandlerPage1Camel : TrackableEventHandlerParent
     protected override void OnTrackingFound() {
         base.OnTrackingFound();
         GetComponentInChildren<Animator>().enabled = true;
-        StartCoroutine(Wait(3));
+        StartCoroutine(Wait(2));
         
 
         

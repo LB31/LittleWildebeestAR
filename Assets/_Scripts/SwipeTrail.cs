@@ -31,10 +31,10 @@ public class SwipeTrail : MonoBehaviour
     private int AmountOfMines;
 
     //! The start colour
-    private Color Color = Color.green;
+    private static Color Color;
 
     public GameObject ButtonsForLanguage;
-    private bool languageWasChosen;
+    private static bool languageWasChosen;
     public Transform BrushTip;
     public SpriteRenderer BrushImage;
 
@@ -95,6 +95,9 @@ public class SwipeTrail : MonoBehaviour
 
     void Update()
     {
+        if (BrushImage.color != Color)
+            BrushImage.color = Color;
+
         // Check, if the screen is touched and if the finger / mouse is moving
         bool fingerOnScreen = (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved) || Input.GetMouseButton(0);
   
