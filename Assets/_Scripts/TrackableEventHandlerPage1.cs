@@ -20,8 +20,10 @@ public class TrackableEventHandlerPage1 : TrackableEventHandlerParent
 
     protected override void OnTrackingFound() {
 
+        Brush.SetActive(true);
         GetComponentInChildren<SwipeTrail>().enabled = true;
-        if(UI != null)
+
+        if (UI != null)
             UI.SetActive(true);
 
 
@@ -30,6 +32,9 @@ public class TrackableEventHandlerPage1 : TrackableEventHandlerParent
     protected override void OnTrackingLost() {
 
         GetComponentInChildren<SwipeTrail>().enabled = false;
+        Brush.SetActive(false);
+        
+
         if (UI != null)
             UI.SetActive(false);
         
