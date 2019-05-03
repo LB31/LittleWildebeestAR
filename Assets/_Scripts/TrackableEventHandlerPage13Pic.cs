@@ -13,6 +13,8 @@ public class TrackableEventHandlerPage13Pic : TrackableEventHandlerParent
 
     public GameObject[] Gras;
 
+    private bool go;
+
     public int speedIndicator = 80; // The bigger the slowlier
 
     protected override void Start() {
@@ -34,23 +36,28 @@ public class TrackableEventHandlerPage13Pic : TrackableEventHandlerParent
         base.OnTrackingFound();
         bgMusic.Play();
 
+        go = true;
     }
 
     protected override void OnTrackingLost() {
         base.OnTrackingLost();
         bgMusic.Stop();
+
+        go = false;
     }
 
     private void Update() {
-        if(water.position.y < 0)
-        water.Translate(new Vector3(0, Time.deltaTime / speedIndicator, 0));
+        if (go) {
+            if (water.position.y < 0)
+                water.Translate(new Vector3(0, Time.deltaTime / speedIndicator, 0));
 
 
-        foreach (GameObject item in Gras) {
-            Material oldMat = item.GetComponent<Renderer>().material;
-            Color oldColor = oldMat.color;
-            oldMat.color = new Color(oldColor.r - Time.deltaTime / speedIndicator, oldColor.g, oldColor.b);
+            foreach (GameObject item in Gras) {
+                Material oldMat = item.GetComponent<Renderer>().material;
+                Color oldColor = oldMat.color;
+                oldMat.color = new Color(oldColor.r - Time.deltaTime / speedIndicator, oldColor.g, oldColor.b);
+            }
         }
-
     }
+
 }
