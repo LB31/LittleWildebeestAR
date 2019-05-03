@@ -13,6 +13,8 @@ public class TrackableEventHandlerPage13Pic : TrackableEventHandlerParent
 
     public GameObject[] Gras;
 
+    public Animator AnimatorElephant;
+
     private bool go;
 
     public int speedIndicator = 80; // The bigger the slowlier
@@ -37,6 +39,7 @@ public class TrackableEventHandlerPage13Pic : TrackableEventHandlerParent
         bgMusic.Play();
 
         go = true;
+        AnimatorElephant.enabled = true;
     }
 
     protected override void OnTrackingLost() {
@@ -44,6 +47,7 @@ public class TrackableEventHandlerPage13Pic : TrackableEventHandlerParent
         bgMusic.Stop();
 
         go = false;
+        AnimatorElephant.enabled = false;
     }
 
     private void Update() {
