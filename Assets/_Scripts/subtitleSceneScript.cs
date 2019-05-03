@@ -24,6 +24,7 @@ public class subtitleSceneScript : MonoBehaviour
         //TMP Box
         tmpUGUI = FindObjectOfType<TextMeshProUGUI>();
         tmpUGUI.fontSize = 12;
+        tmpUGUI.color = new Color32(57, 255, 20, 255);
 
         //Page One Subtitles
         string clearText = "";
