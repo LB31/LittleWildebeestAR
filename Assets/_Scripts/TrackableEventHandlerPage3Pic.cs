@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using Vuforia;
 
 public class TrackableEventHandlerPage3Pic : TrackableEventHandlerParent
 {
     public GameObject[] InfoCards;
+    public GameObject InfoUI;
 
+    private string[] infoTexts = new string[] {"Berühre eines der Tiere", "Touch one of the animals" };
     private int LastFoundCard = -1;
 
     protected override void Start() {
@@ -22,7 +25,9 @@ public class TrackableEventHandlerPage3Pic : TrackableEventHandlerParent
     protected override void OnTrackingFound() {
         base.OnTrackingFound();
 
+        InfoUI.SetActive(true);
 
+        SetInfoText();
     }
 
     protected override void OnTrackingLost() {
@@ -36,7 +41,10 @@ public class TrackableEventHandlerPage3Pic : TrackableEventHandlerParent
     }
 
     public void ActivateCard(int cardNumber) {
-        if(LastFoundCard != -1) {
+
+        InfoUI.SetActive(false);
+
+        if (LastFoundCard != -1) {
             GameObject lastCard = InfoCards[LastFoundCard];
             lastCard.GetComponentInChildren<Animator>().Play("InformationStandUp", -1, 0f); // Reset the animation
             lastCard.SetActive(false);
@@ -60,4 +68,21 @@ public class TrackableEventHandlerPage3Pic : TrackableEventHandlerParent
         if (animal != "") // To update the language
             InfoCards[cardNumber].GetComponent<DatabaseController>().ActivateInformation(animal);
     }
+
+    public void SetLanguage(string language) {
+        if (ReadingManager.chosenLanguage != language) {
+            ReadingManager.chosenLanguage = language;
+            ReadingManager.languageWasChanged = true;
+            TrackableEventHandlerParent.markerFound(SwipeTrail.LastMarkerName); // To play the audio of the first page immediately
+
+            SetInfoText();
+        }
+    }
+
+    private void SetInfoText() {
+        int langNumb = ReadingManager.chosenLanguageNumber;
+        langNumb = langNumb == 2 ? 1 : langNumb;
+        InfoUI.GetComponentInChildren<TextMeshProUGUI>().text = infoTexts[langNumb];
+    }
+
 }
