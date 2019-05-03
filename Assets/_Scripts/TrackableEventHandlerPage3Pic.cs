@@ -28,6 +28,7 @@ public class TrackableEventHandlerPage3Pic : TrackableEventHandlerParent
         InfoUI.SetActive(true);
 
         SetInfoText();
+        SetArrowColor();
     }
 
     protected override void OnTrackingLost() {
@@ -41,6 +42,13 @@ public class TrackableEventHandlerPage3Pic : TrackableEventHandlerParent
     }
 
     public void ActivateCard(int cardNumber) {
+
+        
+
+        if (cardNumber == LastFoundCard) // To avoid selection of the same card
+            return;
+        if (ReadingManager.chosenLanguageNumber == -1)
+            return;
 
         InfoUI.SetActive(false);
 
@@ -76,6 +84,7 @@ public class TrackableEventHandlerPage3Pic : TrackableEventHandlerParent
             TrackableEventHandlerParent.markerFound(SwipeTrail.LastMarkerName); // To play the audio of the first page immediately
 
             SetInfoText();
+            SetArrowColor();
         }
     }
 
@@ -83,6 +92,28 @@ public class TrackableEventHandlerPage3Pic : TrackableEventHandlerParent
         int langNumb = ReadingManager.chosenLanguageNumber;
         langNumb = langNumb == 2 ? 1 : langNumb;
         InfoUI.GetComponentInChildren<TextMeshProUGUI>().text = infoTexts[langNumb];
+    }
+
+    private void SetArrowColor() {
+        if(ReadingManager.chosenLanguageNumber != -1) {
+            Color arrowColor = Color.white;
+            switch (ReadingManager.chosenLanguageNumber) {
+                case 0:
+                    arrowColor = Color.red;
+                    break;
+                case 1:
+                    arrowColor = Color.blue;
+                    break;
+                case 2:
+                    arrowColor = Color.green;
+                    break;
+            }
+            foreach (Transform item in InfoUI.transform) {
+                if (item.GetComponent<UnityEngine.UI.Image>()) {
+                    item.GetComponent<UnityEngine.UI.Image>().color = arrowColor;
+                }
+            }
+        }
     }
 
 }

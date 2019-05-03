@@ -246,7 +246,7 @@ public class SwipeTrail : MonoBehaviour
             ReadingManager.chosenLanguage = language;
             ReadingManager.languageWasChanged = true;
             TrackableEventHandlerParent.markerFound(LastMarkerName); // To play the audio of the first page immediately
-            print(LastMarkerName);
+
         }
     }
 
