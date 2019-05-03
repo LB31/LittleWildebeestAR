@@ -15,6 +15,9 @@ public class ElephantController : MonoBehaviour
 
     public Transform[] StuffToCollect;
 
+    private int collectionCounter;
+    public GameObject speechBubble;
+
     void Start() {
         animator = GetComponentInChildren<Animator>();
         characterController = GetComponent<CharacterController>();
@@ -35,7 +38,11 @@ public class ElephantController : MonoBehaviour
         foreach (Transform item in StuffToCollect) {
             if(hit.transform.Equals(item)) {
                 Destroy(hit.transform.gameObject);
+                collectionCounter++;
             }
+        }
+        if(collectionCounter == StuffToCollect.Length) {
+            speechBubble.SetActive(true);
         }
     }
 
