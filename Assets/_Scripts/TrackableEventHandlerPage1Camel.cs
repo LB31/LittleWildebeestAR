@@ -5,10 +5,20 @@ using Vuforia;
 
 public class TrackableEventHandlerPage1Camel : TrackableEventHandlerParent
 {
-    public GameObject imageThingy;
+
+    public Animator anim;
 
     protected override void Start() {
         base.Start();
+
+
+        
+    }
+
+    private void Awake() {
+        anim = GetComponentInChildren<Animator>();
+        anim.Play("camelAppears", -1, 0f);
+        anim.enabled = false;
     }
 
     protected override void OnDestroy() {
@@ -18,14 +28,14 @@ public class TrackableEventHandlerPage1Camel : TrackableEventHandlerParent
     IEnumerator Wait(float time) {
 
         yield return new WaitForSeconds(time);
-        imageThingy.SetActive(false);
+
         GetComponent<AudioSource>().Play();
 
     }
 
     protected override void OnTrackingFound() {
         base.OnTrackingFound();
-        GetComponentInChildren<Animator>().enabled = true;
+        anim.enabled = true;
         StartCoroutine(Wait(2));
         
 
@@ -36,7 +46,10 @@ public class TrackableEventHandlerPage1Camel : TrackableEventHandlerParent
         base.OnTrackingLost();
 
         GetComponent<AudioSource>().Stop();
-        GetComponentInChildren<Animator>().enabled = false;
+        
+        anim.Play("camelAppears", -1, 0f);
+
+        anim.enabled = false;
      
         
     }
