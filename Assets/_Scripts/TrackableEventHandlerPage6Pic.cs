@@ -5,7 +5,7 @@ using Vuforia;
 
 public class TrackableEventHandlerPage6Pic : TrackableEventHandlerParent
 {
-    public GameObject Arrows;
+    public GameObject Maze;
 
     protected override void Start() {
         base.Start();
@@ -19,13 +19,13 @@ public class TrackableEventHandlerPage6Pic : TrackableEventHandlerParent
 
     protected override void OnTrackingFound() {
         base.OnTrackingFound();
-        Arrows.SetActive(true);
+        Maze.SetActive(true);
 
     }
 
     protected override void OnTrackingLost() {
         base.OnTrackingLost();
-        Arrows.SetActive(false);
+        Maze.SetActive(false);
 
     }
 }
