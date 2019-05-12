@@ -57,7 +57,7 @@ public class DatabaseController : MonoBehaviour
         }
         if (currentAnimal != null) {
             int languageNumb = ReadingManager.chosenLanguageNumber;
-            languageNumb = languageNumb == 2 ? 1 : languageNumb;
+            languageNumb = languageNumb == 2 ? 1 : languageNumb; // Because we don't have Oshiwambo texts
             TextName.text = "<b>" + currentAnimal.AnimalName + "</b>";
             TextInformation.text = "<b>Information</b>\n" + currentAnimal.Information[languageNumb];
             TextPopulation.text = "<b>Population</b>\n" + currentAnimal.Population[languageNumb];

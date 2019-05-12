@@ -13,6 +13,7 @@ public class SwipeTrail : MonoBehaviour
     public int LineCounter = -1;
 
     public GameObject PlaneToDrawOn;
+    public GameObject PlaneOutside;
 
     public float lineWidth = 0.75f;
 
@@ -35,7 +36,7 @@ public class SwipeTrail : MonoBehaviour
 
     public GameObject ButtonsForLanguage;
     private static bool languageWasChosen;
-    public Transform BrushTip;
+
     public SpriteRenderer BrushImage;
 
     public GameObject ApprovalElephant;
@@ -44,9 +45,11 @@ public class SwipeTrail : MonoBehaviour
 
     private Vector3 StandardPosition;
 
+    private float minesToBeDestroyed;
 
     void Awake()
     {
+        
         StandardPosition = transform.position;
 
         TrailRenderer = GetComponentInChildren<TrailRenderer>();
@@ -58,8 +61,11 @@ public class SwipeTrail : MonoBehaviour
 
 
         AmountOfMines = GameObject.FindGameObjectsWithTag("Mine").Length;
+        minesToBeDestroyed = AmountOfMines * (float)PercentToBeFilled / 100f;
 
     }
+
+    private bool OnMine;
 
     private void OnTriggerStay(Collider other) {
         if (other.transform.gameObject.name == PlaneToDrawOn.name || other.transform.CompareTag("Mine")) {
@@ -70,12 +76,15 @@ public class SwipeTrail : MonoBehaviour
             if (other.transform.CompareTag("Mine")) { // This line is stupid. However, I didn't want to rework the scene structure for a smarter code
                 DestroyedMinesCount++;
                 Destroy(other.transform.gameObject);
+                OnMine = true;
 
-          
 
-                if (AmountOfMines * (float)PercentToBeFilled / 100f < DestroyedMinesCount) {
-                    ApprovalElephant.SetActive(true); // TODO react to the filled elephant
+                // The drawing is ready
+                if (minesToBeDestroyed < DestroyedMinesCount) {
+                    ApprovalElephant.SetActive(true); 
                 }
+            } else {
+                OnMine = false;
             }
 
         }
@@ -83,7 +92,9 @@ public class SwipeTrail : MonoBehaviour
 
 
     private void OnTriggerExit(Collider other) {
-        if (other.transform.gameObject.name == PlaneToDrawOn.name) {
+
+
+        if (other.transform.gameObject.name == PlaneToDrawOn.name && !OnMine) {
             TrailRenderer.enabled = false;
             //StoreRay();
             //CreateLineObject();
@@ -239,13 +250,14 @@ public class SwipeTrail : MonoBehaviour
         BrushImage.enabled = true;
         BrushImage.color = Color;
 
+        TrailRenderer.enabled = false;
         transform.position = StandardPosition;
 
 
         if (ReadingManager.chosenLanguage != language) {
             ReadingManager.chosenLanguage = language;
             ReadingManager.languageWasChanged = true;
-            TrackableEventHandlerParent.markerFound(LastMarkerName); // To play the audio of the first page immediately
+            TrackableEventHandlerParent.markerFound(LastMarkerName); // To play the audio of the page after language selection
 
         }
     }

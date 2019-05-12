@@ -9,6 +9,8 @@ public class TrackableEventHandlerPage3Pic : TrackableEventHandlerParent
     public GameObject[] InfoCards;
     public GameObject InfoUI;
 
+    private Material infoMat;
+
     private string[] infoTexts = new string[] {"Berühre eines der Tiere", "Touch one of the animals" };
     private int LastFoundCard = -1;
 
@@ -25,7 +27,7 @@ public class TrackableEventHandlerPage3Pic : TrackableEventHandlerParent
     protected override void OnTrackingFound() {
         base.OnTrackingFound();
 
-        InfoUI.SetActive(true);
+        //InfoUI.SetActive(true);
 
         SetInfoText();
         SetArrowColor();
@@ -33,6 +35,8 @@ public class TrackableEventHandlerPage3Pic : TrackableEventHandlerParent
 
     protected override void OnTrackingLost() {
         base.OnTrackingLost();
+
+        LastFoundCard = -1;
 
         foreach (GameObject item in InfoCards) {
             item.GetComponentInChildren<Animator>().Play("InformationStandUp", -1, 0f); // Reset the animation
@@ -90,7 +94,7 @@ public class TrackableEventHandlerPage3Pic : TrackableEventHandlerParent
 
     private void SetInfoText() {
         int langNumb = ReadingManager.chosenLanguageNumber;
-        langNumb = langNumb == 2 ? 1 : langNumb;
+        langNumb = (langNumb == 2 || langNumb  == - 1) ? 1 : langNumb;
         InfoUI.GetComponentInChildren<TextMeshProUGUI>().text = infoTexts[langNumb];
     }
 
@@ -98,8 +102,8 @@ public class TrackableEventHandlerPage3Pic : TrackableEventHandlerParent
         if(ReadingManager.chosenLanguageNumber != -1) {
             Color arrowColor = Color.white;
             switch (ReadingManager.chosenLanguageNumber) {
-                case 0:
-                    arrowColor = Color.red;
+                case 0:     
+                    arrowColor = Color.red;                  
                     break;
                 case 1:
                     arrowColor = Color.blue;
@@ -113,6 +117,13 @@ public class TrackableEventHandlerPage3Pic : TrackableEventHandlerParent
                     item.GetComponent<UnityEngine.UI.Image>().color = arrowColor;
                 }
             }
+
+            // For setting the bg color of the cards
+            //foreach (GameObject item in GameObject.FindGameObjectsWithTag("ColorBG")) {
+            //    if (item.GetComponentInChildren<Renderer>().material) {
+            //        item.GetComponentInChildren<Renderer>().material.color = arrowColor;
+            //    }
+            //}
         }
     }
 

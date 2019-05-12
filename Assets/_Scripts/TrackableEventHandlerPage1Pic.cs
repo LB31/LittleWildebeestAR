@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using Vuforia;
 
-public class TrackableEventHandlerPage1 : TrackableEventHandlerParent
+public class TrackableEventHandlerPage1Pic : TrackableEventHandlerParent
 {
     public GameObject UI;
     public GameObject Brush;

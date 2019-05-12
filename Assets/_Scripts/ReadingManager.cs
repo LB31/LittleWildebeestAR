@@ -35,18 +35,17 @@ public class ReadingManager : MonoBehaviour
         langForPublic = chosenLanguage;
         if (stuff == "lost") {
             audioSource.Pause();
-            print("paused and lost");
             return;
         }
 
-        string resultString = Regex.Match(stuff, @"\d+").Value;
+        string resultString = Regex.Match(stuff, @"\d+").Value; // Find the number in the string
 
         if (resultString.Any(char.IsDigit) && Int32.Parse(resultString) <= readyAudioPages && chosenLanguage != "") {
             int newFoundPage = Int32.Parse(resultString);
             print(newFoundPage);
             if (newFoundPage != lastFoundPage || languageWasChanged) {
                 languageWasChanged = false;
-                print("new page");
+ 
                 FileStorer currentFiles = AudioFilesToRead[newFoundPage];
                 AudioClip clipToPlay = null;
 

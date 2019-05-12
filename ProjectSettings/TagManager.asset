@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Mine
+  - ColorBG
   layers:
   - Default
   - TransparentFX

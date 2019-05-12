@@ -29,7 +29,7 @@ public class TrackableEventHandlerFrontPage : TrackableEventHandlerParent
     protected override void OnTrackingLost() {
         base.OnTrackingLost();
 
-        vid.Pause();
+        vid.Stop();
     }
 
 
