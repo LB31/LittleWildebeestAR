@@ -36,6 +36,8 @@ public class TrackableEventHandlerPage3Pic : TrackableEventHandlerParent
     protected override void OnTrackingLost() {
         base.OnTrackingLost();
 
+        InfoUI.SetActive(true);
+
         LastFoundCard = -1;
 
         foreach (GameObject item in InfoCards) {
