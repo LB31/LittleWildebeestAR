@@ -9312,11 +9312,11 @@ MonoBehaviour:
   water: {fileID: 2470780895538645458}
   originalGras: {fileID: 2100000, guid: 5017270c5c616af4f9a8a7c2258072f3, type: 2}
   newGras: {fileID: 2100000, guid: 81b3740442a2ede4999adac2004472c0, type: 2}
-  Gras:
+  GrasObjects:
   - {fileID: 7906518420263871942}
   - {fileID: 2832420439658755610}
-  AnimatorElephant: {fileID: 1501688444}
-  speedIndicator: 70
+  rainySavanna: {fileID: 2470780896561979566}
+  speedIndicator: 60
 --- !u!114 &1104081046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10716,7 +10716,7 @@ PrefabInstance:
     - target: {fileID: 5134620500702991575, guid: 5e1940436168cc14c859715ee34456bd,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e1940436168cc14c859715ee34456bd, type: 3}
@@ -14535,12 +14535,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!95 &1501688444 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 5134620500702991575, guid: 5e1940436168cc14c859715ee34456bd,
-    type: 3}
-  m_PrefabInstance: {fileID: 1177596381}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1501688445 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3011735958417815981, guid: 5e1940436168cc14c859715ee34456bd,
@@ -26351,7 +26345,7 @@ GameObject:
   - component: {fileID: 2470780894607089820}
   - component: {fileID: 2470780894607089821}
   m_Layer: 0
-  m_Name: Particle System
+  m_Name: Rain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26429,7 +26423,7 @@ WindZone:
   m_Enabled: 1
   m_Mode: 0
   m_Radius: 20
-  m_WindMain: 5
+  m_WindMain: 2
   m_WindTurbulence: 1
   m_WindPulseMagnitude: 0.5
   m_WindPulseFrequency: 0.01
@@ -27082,7 +27076,7 @@ ParticleSystem:
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 20, y: 1, z: 20}
+    m_Scale: {x: 50, y: 1, z: 50}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -31129,7 +31123,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: d83ebf32a99687b41bb27fc1eea1cace, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 5ff944d1ffb27fb468963db37a0bec7c, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -31175,7 +31169,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -31458,7 +31452,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2470780896561979473}
   m_Layer: 0
-  m_Name: StarWars6
+  m_Name: RainySavanna
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

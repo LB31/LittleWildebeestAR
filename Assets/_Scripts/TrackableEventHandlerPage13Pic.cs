@@ -11,52 +11,67 @@ public class TrackableEventHandlerPage13Pic : TrackableEventHandlerParent
     public Material originalGras;
     public Material newGras;
 
-    public GameObject[] Gras;
+    public GameObject[] GrasObjects;
 
-    public Animator AnimatorElephant;
+    public GameObject rainySavanna;
 
-    private bool go;
+    private bool startAction;
+    private Vector3 originalWaterPos;
 
     public int speedIndicator = 80; // The bigger the slowlier
 
     protected override void Start() {
         base.Start();
 
-        newGras.CopyPropertiesFromMaterial(originalGras);
-        foreach (GameObject item in Gras) {
-            item.GetComponent<Renderer>().material = newGras;
-        }
+        
     }
 
     protected override void OnDestroy() {
         base.OnDestroy();
     }
 
- 
+    private void Awake() {
+        originalWaterPos = water.localPosition;
+    }
 
     protected override void OnTrackingFound() {
         base.OnTrackingFound();
+        rainySavanna.SetActive(true);
+
+        newGras.CopyPropertiesFromMaterial(originalGras);
+        foreach (GameObject item in GrasObjects) {
+            item.GetComponent<Renderer>().material = newGras;
+        }
+
+
         bgMusic.Play();
 
-        go = true;
-        AnimatorElephant.enabled = true;
+        startAction = true;
+        
     }
 
     protected override void OnTrackingLost() {
         base.OnTrackingLost();
+        
+
+
+        water.localPosition = originalWaterPos;
+
+
         bgMusic.Stop();
 
-        go = false;
-        AnimatorElephant.enabled = false;
+        startAction = false;
+
+        rainySavanna.SetActive(false);
     }
 
     private void Update() {
-        if (go) {
+        if (startAction) {
             if (water.position.y < 0)
                 water.Translate(new Vector3(0, Time.deltaTime / speedIndicator, 0));
 
 
-            foreach (GameObject item in Gras) {
+            foreach (GameObject item in GrasObjects) {
                 Material oldMat = item.GetComponent<Renderer>().material;
                 Color oldColor = oldMat.color;
                 oldMat.color = new Color(oldColor.r - Time.deltaTime / speedIndicator, oldColor.g, oldColor.b);
