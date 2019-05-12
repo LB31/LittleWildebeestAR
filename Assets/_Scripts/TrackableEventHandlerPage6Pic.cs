@@ -7,6 +7,8 @@ public class TrackableEventHandlerPage6Pic : TrackableEventHandlerParent
 {
     public GameObject Maze;
 
+    private AudioSource audio;
+
     protected override void Start() {
         base.Start();
     }
@@ -15,11 +17,15 @@ public class TrackableEventHandlerPage6Pic : TrackableEventHandlerParent
         base.OnDestroy();
     }
 
- 
+    private void Awake() {
+        audio = GetComponent<AudioSource>();
+    }
 
     protected override void OnTrackingFound() {
         base.OnTrackingFound();
         Maze.SetActive(true);
+
+        audio.Play();
 
     }
 
@@ -27,5 +33,6 @@ public class TrackableEventHandlerPage6Pic : TrackableEventHandlerParent
         base.OnTrackingLost();
         Maze.SetActive(false);
 
+        audio.Stop();
     }
 }
