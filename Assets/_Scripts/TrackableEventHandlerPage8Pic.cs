@@ -9,6 +9,8 @@ public class TrackableEventHandlerPage8Pic : TrackableEventHandlerParent
     public AudioClip clipTarget;
     private AudioSource[] allAudioSources;
 
+    public GameObject AnimatedObject;
+
     protected override void Start() {
         base.Start();
     }
@@ -22,17 +24,24 @@ public class TrackableEventHandlerPage8Pic : TrackableEventHandlerParent
     protected override void OnTrackingFound() {
         base.OnTrackingFound();
 
+        AnimatedObject.SetActive(true);
 
-        soundTarget.clip = clipTarget;
-        soundTarget.loop = false;
-        soundTarget.Play();
+        if (soundTarget != null) {
+            soundTarget.clip = clipTarget;
+            soundTarget.loop = false;
+            soundTarget.Play();
+        }
 
     }
 
     protected override void OnTrackingLost() {
         base.OnTrackingLost();
 
-        soundTarget.Stop();
+        AnimatedObject.SetActive(false);
+
+        if (soundTarget != null) {
+            soundTarget.Stop();
+        }
 
     }
 }
